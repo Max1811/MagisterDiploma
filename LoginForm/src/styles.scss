@@ -1,0 +1,28 @@
+$mint-green-color: #5DC095;
+$smooth-light-orange: #FFF0D9;
+$orange: #FF7E00;
+$yellow: #FCEE0C;
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.list-cleanup {
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.jumbotron {
+  background-image: linear-gradient(to right, $orange, $yellow);
+  min-height: 100%;
+  width: 100%;
+  border-radius: 0;
+}
