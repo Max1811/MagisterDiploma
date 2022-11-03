@@ -1,13 +1,13 @@
 ﻿using LoginForm.BL.Models;
 using LoginForm.DataAccess.Entities;
-using System.Net;
+using LoginForm.Shared.Enums;
 
 namespace LoginForm.BL.Services.Contracts
 {
     public interface IUserService
     {
-        public Task<User?> ValidateUser(string login, string password);
+        public Task<(User?, LoginResponse)> ValidateUser(string login, string password);
 
-        public Task<User> SignUp(SignUpModel model);
+        public Task<SignUpResponse> SignUp(SignUpModel model);
     }
 }

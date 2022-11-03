@@ -1,49 +1,10 @@
 @import "../../../styles.scss";
 
 .content-wrapper {
-  color: $orange;
 
   .content {
-    background-color: #fff;
-    padding: 32px;
-    //border: 5px solid $mint-green-color;
-    border-radius: 10px;
-    width: 25%;
-    height: auto;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    z-index: 1;
-
-    .title {
-      font-weight: 700;
-      padding-bottom: 1.5rem;
-    }
 
     .login-form {
-
-      .label-text {
-        font-size: 10px;
-        margin: 0;
-        font-weight: 500;
-        color: #999;
-      }
-
-      .form-control {
-        border: none;
-        border-bottom: 1px solid #666;
-        font-family: Arial, FontAwesome;
-      }
-
-      .form-control:focus {
-        box-shadow: none;
-      }
-
-      .form-control::placeholder {
-        color: #999;
-        font-size: 12px;
-      }
 
       .forgot-password {
         font-size: 13px;
@@ -51,81 +12,27 @@
         color: #666;
       }
 
-      .submit-button-wrapper {
-        padding-bottom: 2rem;
-      }
-    }
+      .password-input-wrapper {
+        
 
-    .sign-up-using {
-      font-size: 11px;
-      font-weight: 500;
-      color: #999;
-    }
+        .password-eye-wrapper {
+           position:relative;
 
-    .sign-up-services-wrapper {
-      padding-bottom: 5rem;
-
-      .sign-up-service-list {
-        display: flex;
-        justify-content: center;
-
-        .sign-up-service-item {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-size: 100%;
-          background-repeat: no-repeat;
-          margin: 0.25rem;
+          span {
+            background-color: #fff !important;
+            border: none;
+            font-size: 11px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+            padding: 0;
+            padding-left: 1rem;
+            color: #666;
+          }
         }
-
-        .google {
-          background-image: url("../../../assets/images/google-logo.png");
-        }
-
-        .facebook {
-          background-image: url("../../../assets/images/facebook-logo.png");
-        }
-
-        .twitter {
-          background-image: url("../../../assets/images/twitter-logo.png");
-        }
-      }
-    }
-
-    .sign-up-using-sign-up-wrapper {
-
-      p {
-        padding-bottom: 0.2rem;
-        margin: 0;
-        font-size: 11px;
-        font-weight: 500;
-        color: #999;
-      }
-
-      .sign-up {
-        color: #666;
-        font-weight: 600;
-        font-size: 12px;
-        margin: 0;
-        padding: 0;
-      }
-
-      .sign-up:hover {
-        text-decoration: none;
       }
     }
   }
 }
 
-.login-btn {
-  background-color: $orange;
-  color: #fff;
-  font-weight: 500;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  border: none;
-  width: 100%;
-}

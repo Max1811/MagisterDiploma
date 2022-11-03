@@ -9,6 +9,7 @@ using LoginForm.DataAccess.Entities;
 using AutoMapper;
 using LoginForm.BL.Models;
 using LoginForm.DataAccess.Repositories.Contracts;
+using LoginForm.Shared.Enums;
 
 namespace LoginForm.API.Controllers
 {
@@ -34,9 +35,9 @@ namespace LoginForm.API.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginCredentials credentials)
+        public async Task<LoginResponse> Login(LoginCredentials credentials)
         {
-            var user = await _userService.ValidateUser(credentials.Login, credentials.Password);
+            var (user, response) = await _userService.ValidateUser(credentials.Login, credentials.Password);
 
             if (user != null)
             {
@@ -49,29 +50,19 @@ namespace LoginForm.API.Controllers
                 await HttpContext.SignInAsync(
                     CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity));
-
-                return Ok();
             }
 
-            return BadRequest("User does not exists");
+            return response;
         }
 
         [HttpPost("sign-up")]
-        public async Task<bool> SignUp(SignUpDto credentials)
+        public async Task<SignUpResponse> SignUp(SignUpDto credentials)
         {
-            if (!ModelState.IsValid)
-                return false;
-
-            bool isUserExists = await _userRepository.IsUserExists(credentials.Login);
-
-            if (isUserExists) // add message that this login has been already taken
-                return false;
-
             var userModel = _mapper.Map<SignUpModel>(credentials);
 
-            var user = await _userService.SignUp(userModel);
+            var response = await _userService.SignUp(userModel);
 
-            return true;
+            return response;
         }
 
         [HttpPost("logout")]
@@ -93,6 +84,12 @@ namespace LoginForm.API.Controllers
                     Id = currentUser.Id,
                     Login = currentUser.Login
                 });
+        }
+
+        [HttpPost("password-recovery")]
+        public async Task RecoverPassword(string email)
+        {
+
         }
     }
 }

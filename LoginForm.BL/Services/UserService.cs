@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using LoginForm.BL.Models;
 using LoginForm.BL.Services.Contracts;
+using LoginForm.BL.Validators;
 using LoginForm.DataAccess.Entities;
 using LoginForm.DataAccess.Repositories.Contracts;
 using LoginForm.Shared;
+using LoginForm.Shared.Enums;
 
 namespace LoginForm.BL.Services
 {
@@ -20,24 +22,63 @@ namespace LoginForm.BL.Services
             _mapper = mapper;
         }
 
-        public async Task<User> SignUp(SignUpModel model)
+        public async Task<SignUpResponse> SignUp(SignUpModel model)
         {
-            byte[] passwordSalt;
-            var hashedPassword = Encryptor.EncryptWithRandomSalt(model.Password, out passwordSalt);
+            var response = ValidateSignUpModel(model);
 
-            var user = _mapper.Map<User>(model);
-            user.HashedPassword = hashedPassword;
-            user.PasswordSalt = passwordSalt;
+            if (response != SignUpResponse.Success)
+                return response;
 
-            //add check for existing user by login
-            return await _userRepository.Add(user);
+            bool isUserExists = await _userRepository.IsUserExists(model.Login);
+
+            if (isUserExists)
+                response = SignUpResponse.LoginIsTaken;
+            else
+            {
+                byte[] passwordSalt;
+                var hashedPassword = Encryptor.EncryptWithRandomSalt(model.Password, out passwordSalt);
+
+                var user = _mapper.Map<User>(model);
+                user.HashedPassword = hashedPassword;
+                user.PasswordSalt = passwordSalt;
+
+                await _userRepository.Add(user);
+            }
+            
+            return response;
         }
 
-        public async Task<User?> ValidateUser(string login, string password)
+        public async Task<(User?, LoginResponse)> ValidateUser(string login, string password)
         {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+                return (null, LoginResponse.EmptyData);
+
             var user = await _userRepository.GetByLogin(login);
 
-            return user is not null && user.HashedPassword == Encryptor.Encrypt(password, user.PasswordSalt) ? user : null;
+            if (user == null)
+                return (null, LoginResponse.IncorrectLogin);
+
+            else if (user.HashedPassword != Encryptor.Encrypt(password, user.PasswordSalt))
+                return (null, LoginResponse.IncorrectPassword);
+
+            return (user, LoginResponse.Success);
+        }
+
+        private SignUpResponse ValidateSignUpModel(SignUpModel model)
+        {
+            if (string.IsNullOrEmpty(model.Login) || string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.Email))
+                return SignUpResponse.EmptyFields;
+
+            if (!EmailValidator.IsValid(model.Email))
+                return SignUpResponse.InvalidEmail;
+
+            if (!LoginValidator.IsValid(model.Login))
+                return SignUpResponse.InvalidLogin;
+
+            if (!PasswordValidator.IsValid(model.Password))
+                return SignUpResponse.InvalidPassword;
+
+            return SignUpResponse.Success;
         }
     }
 }
