@@ -29,7 +29,7 @@ namespace Diploma.BL.Services
 
                 if (userLogin != null)
                 {
-                    return await _userRepository.GetByLogin(userLogin);
+                    return await _userRepository.GetByLoginAsync(userLogin);
                 }
             }
 

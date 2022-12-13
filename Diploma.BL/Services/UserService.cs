@@ -13,13 +13,60 @@ namespace Diploma.BL.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IEmailSendingService _emailSendingService;
 
         public UserService(
             IUserRepository userRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IEmailSendingService emailSendingService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _emailSendingService = emailSendingService;
+        }
+
+        public async Task<ChangePasswordResponse> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            if(string.IsNullOrEmpty(changePasswordModel.Password) || string.IsNullOrEmpty(changePasswordModel.RepeatPassword))
+            {
+                return ChangePasswordResponse.EmptyFields;
+            }
+
+            else if (changePasswordModel.Password != changePasswordModel.RepeatPassword)
+            {
+                return ChangePasswordResponse.PasswordsNotMatch;
+            }
+
+            byte[] passwordSalt;
+            var hashedPassword = Encryptor.EncryptWithRandomSalt(changePasswordModel.Password, out passwordSalt);
+
+            await _userRepository.ChangePasswordAsync(changePasswordModel.Email, hashedPassword, passwordSalt);
+
+            return ChangePasswordResponse.Success;
+        }
+
+        public async Task<PasswordRecoverResponse> RecoverPassword(string email)
+        {
+            if (!EmailValidator.IsValid(email))
+                return PasswordRecoverResponse.EmailNotValid;
+
+            var user = await _userRepository.GetByEmailAsync(email);
+
+            if (user is null)
+                return PasswordRecoverResponse.UserNotExists;
+
+            try
+            {
+                await _emailSendingService.SendResetPasswordEmailAsync(email);
+            }
+            catch(Exception ex)
+            {
+                //log exception
+
+                return PasswordRecoverResponse.EmailNotValid;
+            }
+
+            return PasswordRecoverResponse.Success;
         }
 
         public async Task<SignUpResponse> SignUp(SignUpModel model)
@@ -42,7 +89,7 @@ namespace Diploma.BL.Services
                 user.HashedPassword = hashedPassword;
                 user.PasswordSalt = passwordSalt;
 
-                await _userRepository.Add(user);
+                await _userRepository.AddAsync(user);
             }
             
             return response;
@@ -53,7 +100,7 @@ namespace Diploma.BL.Services
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
                 return (null, LoginResponse.EmptyData);
 
-            var user = await _userRepository.GetByLogin(login);
+            var user = await _userRepository.GetByLoginAsync(login);
 
             if (user == null)
                 return (null, LoginResponse.IncorrectLogin);

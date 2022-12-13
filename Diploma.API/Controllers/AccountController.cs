@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Claims;
 
 namespace Diploma.API.Controllers
@@ -35,7 +36,7 @@ namespace Diploma.API.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<LoginResponse> Login(LoginCredentials credentials)
+        public async Task<LoginResponse> Login(LoginCredentialsDto credentials)
         {
             var (user, response) = await _userService.ValidateUser(credentials.Login, credentials.Password);
 
@@ -87,9 +88,21 @@ namespace Diploma.API.Controllers
         }
 
         [HttpPost("password-recovery")]
-        public async Task RecoverPassword(string email)
+        public async Task<PasswordRecoverResponse> RecoverPassword(PasswordRecoveryDTO model)
         {
+            var response = await _userService.RecoverPassword(model.Email);
 
+            return response;
+        }
+
+        [HttpPost("change-password")]
+        public async Task<ChangePasswordResponse> ChangePassword(ChangePasswordDto model)
+        {
+            var changePasswordModel = _mapper.Map<ChangePasswordModel>(model);
+
+            var response = await _userService.ChangePassword(changePasswordModel);
+
+            return response;
         }
     }
 }

@@ -18,6 +18,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoggedInGuard } from './logged-in.guard';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { CurrentUserStorage } from './current-user-storage';
+import { ChangePasswordComponent } from './auth/create-new-password/change-password.component'
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CurrentUserStorage } from './current-user-storage';
     LoginComponent,
     PasswordRecoverComponent,
     RegisterComponent,
-    SignUpComponent
+    SignUpComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

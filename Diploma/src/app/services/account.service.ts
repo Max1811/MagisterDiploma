@@ -23,6 +23,14 @@ export class AccountService {
   public signUp(email: string, login: string, password: string): Promise<SignUpResponse> {
     return this.api.post('account/sign-up', { email: email, login: login, password: password });
   }
+
+  public recoverPassword(email: string): Promise<PasswordRecoverResponse> {
+    return this.api.post('account/password-recovery', { email: email });
+  }
+
+  public changePassword(email: string, password: string, repeatPassword: string): Promise<ChangePasswordResponse> {
+    return this.api.post('account/change-password', { email: email, password: password, repeatPassword: repeatPassword });
+  }
 }
 
 export enum LoginResponse {
@@ -39,6 +47,18 @@ export enum SignUpResponse {
   InvalidPassword = "InvalidPassword",
   EmptyFields = "EmptyFields",
   LoginIsTaken = "LoginIsTaken"
+}
+
+export enum PasswordRecoverResponse {
+  EmailNotValid = "EmailNotValid",
+  UserNotExists = "UserNotExists",
+  Success = "Success"
+}
+
+export enum ChangePasswordResponse {
+  Success = "Success",
+  PasswordsNotMatch = "PasswordsNotMatch",
+  EmptyFields = "EmptyFields"
 }
 
 export interface ICurrentUser {

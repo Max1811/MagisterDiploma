@@ -1,6 +1,6 @@
 ﻿namespace Diploma.API.Models
 {
-    public class LoginCredentials
+    public class LoginCredentialsDto
     {
         public string Login { get; set; }
 

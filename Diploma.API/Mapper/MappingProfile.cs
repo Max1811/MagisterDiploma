@@ -11,6 +11,7 @@ namespace Diploma.API.Mapper
         {
             CreateMap<SignUpDto, SignUpModel>();
             CreateMap<SignUpModel, User>();
+            CreateMap<ChangePasswordDto, ChangePasswordModel>();
         }
     }
 }

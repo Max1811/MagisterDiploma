@@ -1,5 +1,6 @@
 using AutoMapper;
 using Diploma.API.Mapper;
+using Diploma.BL.Options;
 using Diploma.DataAccess;
 using Diploma.DependencyResolver;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -29,6 +30,9 @@ var mapperConfig = new MapperConfiguration(mc =>
 
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+builder.Services.Configure<SmtpConfigOptions>(
+    builder.Configuration.GetSection(SmtpConfigOptions.SMTP_CONFIG));
 
 builder.Services.RegisterDependencies(builder.Configuration);
 

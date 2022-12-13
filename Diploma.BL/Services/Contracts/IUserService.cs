@@ -9,5 +9,9 @@ namespace Diploma.BL.Services.Contracts
         public Task<(User?, LoginResponse)> ValidateUser(string login, string password);
 
         public Task<SignUpResponse> SignUp(SignUpModel model);
+
+        public Task<PasswordRecoverResponse> RecoverPassword(string email);
+
+        public Task<ChangePasswordResponse> ChangePassword(ChangePasswordModel changePasswordModel);
     }
 }

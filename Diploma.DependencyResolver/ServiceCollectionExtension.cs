@@ -17,6 +17,7 @@ namespace Diploma.DependencyResolver
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICurrentUserAware, CurrentUserAware>();
+            services.AddScoped<IEmailSendingService, EmailSendingService>();
         }
     }
 }

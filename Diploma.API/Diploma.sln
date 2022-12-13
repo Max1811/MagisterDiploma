@@ -15,6 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diploma.DependencyResolver"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diploma.Shared", "..\Diploma.Shared\Diploma.Shared.csproj", "{9576963F-6222-445C-A315-D1D7CA7D85E3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{42AE0EE1-56D4-454C-908A-CDACD8740D46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E06C4203-B56F-4322-9F39-1B83EA9BE1BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{949E6B44-3FE4-4C52-BC50-FA0EC33BBA86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +56,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E06C4203-B56F-4322-9F39-1B83EA9BE1BF} = {42AE0EE1-56D4-454C-908A-CDACD8740D46}
+		{949E6B44-3FE4-4C52-BC50-FA0EC33BBA86} = {42AE0EE1-56D4-454C-908A-CDACD8740D46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93427F82-2A3B-430A-90A0-3C611787CDEC}
