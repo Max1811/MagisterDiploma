@@ -18,6 +18,8 @@ namespace Diploma.DependencyResolver
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICurrentUserAware, CurrentUserAware>();
             services.AddScoped<IEmailSendingService, EmailSendingService>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
         }
     }
 }

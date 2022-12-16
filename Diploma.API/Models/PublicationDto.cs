@@ -19,9 +19,5 @@
         public int? ConferenceId { get; set; }
 
         public int? DigestId { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDatae { get; set; }
     }
 }

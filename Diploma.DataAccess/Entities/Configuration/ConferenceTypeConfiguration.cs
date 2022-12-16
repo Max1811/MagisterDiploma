@@ -7,7 +7,7 @@ namespace Diploma.DataAccess.Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<ConferenceType> builder)
         {
-            builder.ToTable("ConferentionTypes");
+            builder.ToTable("ConferenceTypes");
             builder.HasKey(x => x.Id);
 
             builder.HasMany(x => x.Conferences)
