@@ -4,21 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Diploma.DataAccess.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository: GenericRepository<User>, IUserRepository
     {
         private DataContext _dataContext;
 
         public UserRepository(DataContext dataContext)
+            :base(dataContext)
         {
             _dataContext = dataContext;
-        }
-
-        public async Task<User> AddAsync(User entity)
-        {
-            var user = await _dataContext.Users.AddAsync(entity);
-            await _dataContext.SaveChangesAsync();
-
-            return user.Entity;
         }
 
         public async Task ChangePasswordAsync(string email, string hashedPassword, byte[] passwordSalt)
@@ -48,13 +41,6 @@ namespace Diploma.DataAccess.Repositories
         public async Task<bool> IsUserExists(string login)
         {
             return await _dataContext.Users.AnyAsync(u => u.Login == login);
-        }
-
-        public async Task UpdateAsync(User user)
-        {
-            _dataContext.Users.Update(user);
-
-            await _dataContext.SaveChangesAsync();
         }
     }
 }

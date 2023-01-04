@@ -7,7 +7,7 @@ namespace Diploma.DataAccess.Repositories.Contracts
     {
         Task<T> AddAsync(T entity);
 
-        void Update(T entity);
+        Task UpdateAsync(T entity);
 
         void Remove(T entity);
 

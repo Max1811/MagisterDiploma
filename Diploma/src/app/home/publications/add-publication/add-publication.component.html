@@ -1,0 +1,60 @@
+<div class="add-publication-wrapper">
+  <h2 class="add-publication-title">Додати Публікацію</h2>
+  <form [formGroup]="addPublication" (ngSubmit)="onSubmit()" class="add-publication-form">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Назва Публікації</mat-label>
+        <input matInput placeholder="Назва...">
+      </mat-form-field>
+    </div>
+    <div class="form-group publication-type-wrapper">
+      <mat-form-field class="example-full-width">
+        <mat-label>Тип Публікації</mat-label>
+        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" [ngModel]="publicationType" (ngModelChange)="publicationTypeChange($event)">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of publicationTypes" [value]="option">
+            {{option.type}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <p>або</p>
+      <div class="add-publication-dialog-wrapper">
+        <button mat-raised-button color="basic" (click)="openDialog()">Створити</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Видання</mat-label>
+        <input matInput placeholder="Видання...">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Місто Видання</mat-label>
+        <input matInput placeholder="Місто...">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Організація</mat-label>
+        <input matInput placeholder="Організація...">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-label>Сторінки</mat-label>
+      <div class="pages">
+        <mat-form-field class="example-full-width">
+          <mat-label>Від</mat-label>
+          <input matInput placeholder="ст.">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>До</mat-label>
+          <input matInput placeholder="ст.">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-group submit-button-wrapper">
+      <button mat-raised-button color="primary">Додати</button>
+    </div>
+  </form>
+</div>

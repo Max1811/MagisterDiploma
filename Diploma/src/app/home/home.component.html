@@ -1,40 +1,18 @@
 <nav class="navbar navbar-expand d-flex justify-content-between">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Головна</a>
-    </div>
-    <div class="navbar-nav">
-        <a class="nav-item nav-link with-margin"  routerLink="/login" (click)="logout()">Вихід</a>
-    </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/">Головна</a>
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/add-publication">Додати Публікацію</a>
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link with-margin" routerLink="/login" (click)="logout()">Вихід</a>
+  </div>
 </nav>
 
 <!-- main app container -->
 <div class="jumbotron">
-  <div class="cards-wrapper">
-    <ul class="cards-list">
-      <li class="card-item">
-        <a class="card-link">
-          1
-        </a>
-      </li>
-      <li class="card-item">
-        <a class="card-link">
-          2
-        </a>
-      </li>
-    </ul>
-    <ul class="cards-list">
-      <li class="card-item">
-        <a class="card-link">
-          3
-        </a>
-      </li>
-      <li class="card-item">
-        <a class="card-link">
-          4
-        </a>
-      </li>
-    </ul>
-  </div>
+  <router-outlet></router-outlet>
 </div>
 
 <div class="footer bg-dark">

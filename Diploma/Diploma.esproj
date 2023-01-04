@@ -10,4 +10,13 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Diploma</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\home\modals\modal.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Include="src\app\home\modals\modal.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\shared\" />
+  </ItemGroup>
 </Project>

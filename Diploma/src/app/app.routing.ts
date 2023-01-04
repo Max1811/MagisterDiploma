@@ -6,12 +6,19 @@ import { RegisterComponent } from "./auth/register/register.component";
 import { HomeComponent } from "./home/home.component";
 import { LoggedInGuard } from "./logged-in.guard";
 import { ChangePasswordComponent } from "./auth/create-new-password/change-password.component";
+import { AddPublicationComponent } from "./home/publications/add-publication/add-publication.component";
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [LoggedInGuard]
+    canActivate: [LoggedInGuard],
+    children: [
+      {
+        path: 'add-publication',
+        component: AddPublicationComponent
+      }
+    ]
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

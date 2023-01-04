@@ -1,0 +1,35 @@
+.example-full-width {
+  width: 40%;
+}
+
+.add-publication-wrapper {
+
+  .add-publication-title {
+    padding: 2rem 0;
+  }
+}
+.publication-type-wrapper {
+  display: flex;
+  
+  p{
+    align-self: flex-end;
+    padding: 0 1rem;
+  }
+
+  .add-publication-dialog-wrapper{
+    display: flex;
+
+    button {
+      align-self: center;
+    }
+  }
+}
+
+.form-group {
+
+  .pages {
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

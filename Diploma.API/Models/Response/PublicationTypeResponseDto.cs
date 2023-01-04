@@ -1,6 +1,6 @@
-﻿namespace Diploma.API.Models
+﻿namespace Diploma.API.Models.Response
 {
-    public class PublicationTypeDto
+    public class PublicationTypeResponseDto
     {
         public int Id { get; set; }
 

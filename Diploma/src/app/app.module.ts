@@ -14,12 +14,20 @@ import { PasswordRecoverComponent } from './auth/password-recover/password-recov
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { RegisterComponent } from './auth/register/register.component';
 import { LoggedInGuard } from './logged-in.guard';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { CurrentUserStorage } from './current-user-storage';
 import { ChangePasswordComponent } from './auth/create-new-password/change-password.component'
-
+import { AddPublicationComponent } from './home/publications/add-publication/add-publication.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatRippleModule } from '@angular/material/core';
+import { AddPublicationDialog } from './home/dialogs/add-publication/add-publication-type-dialog';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -29,7 +37,9 @@ import { ChangePasswordComponent } from './auth/create-new-password/change-passw
     PasswordRecoverComponent,
     RegisterComponent,
     SignUpComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AddPublicationComponent,
+    AddPublicationDialog
   ],
   imports: [
     BrowserModule,
@@ -38,11 +48,28 @@ import { ChangePasswordComponent } from './auth/create-new-password/change-passw
     ReactiveFormsModule,
 
     //material modules
+    BrowserAnimationsModule,
+    MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatDialogModule,
+    MatRippleModule,
+    ScrollingModule,
     //MaterialModule,
     
     RouterModule.forRoot(routes, { useHash: false }),
+  ],
+  exports: [
+    MatButtonModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatRippleModule,
   ],
   providers: [
     LoggedInGuard,

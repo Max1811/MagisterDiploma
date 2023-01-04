@@ -19,6 +19,7 @@ namespace Diploma.DataAccess.Repositories
         public async Task<T> AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+            await SaveAsync();
 
             return entity;
         }
@@ -117,9 +118,11 @@ namespace Diploma.DataAccess.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
+
+            await SaveAsync();
         }
     }
 }

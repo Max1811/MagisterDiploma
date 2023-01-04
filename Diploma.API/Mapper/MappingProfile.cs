@@ -22,6 +22,9 @@ namespace Diploma.API.Mapper
 
             CreateMap<PublicationTypeDto, PublicationTypeModel>();
             CreateMap<PublicationTypeModel, PublicationType>();
+
+            CreateMap<PublicationTypeModel, PublicationTypeDto>();
+            CreateMap<PublicationType, PublicationTypeModel>();
         }
     }
 }

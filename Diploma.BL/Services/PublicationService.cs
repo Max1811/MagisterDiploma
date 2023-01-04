@@ -8,14 +8,17 @@ namespace Diploma.BL.Services
 {
     public class PublicationService : IPublicationService
     {
-        private readonly IGenericRepository<Publication> _genericRepository;
+        private readonly IPublicationRepository _publicationRepository;
+        private readonly IPublicationTypeRepository _publicationTypeRepository;
         private readonly IMapper _mapper;
 
         public PublicationService(
-            IGenericRepository<Publication> genericRepository,
+            IPublicationRepository publicationRepository,
+            IPublicationTypeRepository publicationTypeRepository,
             IMapper mapper)
         {
-            _genericRepository = genericRepository;
+            _publicationRepository = publicationRepository;
+            _publicationTypeRepository = publicationTypeRepository;
             _mapper = mapper;
         }
 
@@ -23,12 +26,24 @@ namespace Diploma.BL.Services
         {
             var entity = _mapper.Map<Publication>(model);
 
-            await _genericRepository.AddAsync(entity);
+            await _publicationRepository.AddAsync(entity);
         }
 
-        public async Task AddPublicationType(PublicationTypeModel model)
+        public async Task AddPublicationType(string publicationType)
         {
-            var entity = _mapper.Map<PublicationType>(model);
+            var entity = new PublicationType
+            {
+                Type = publicationType
+            };
+
+            await _publicationTypeRepository.AddPublicationType(entity);
+        }
+
+        public async Task<IEnumerable<PublicationTypeModel>> GetPublicationTypes(string? filter)
+        {
+            var entities = await _publicationTypeRepository.GetPublicationTypes(filter);
+
+            return _mapper.Map<IEnumerable<PublicationTypeModel>>(entities);
         }
     }
 }

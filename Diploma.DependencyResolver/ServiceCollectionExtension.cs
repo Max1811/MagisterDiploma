@@ -14,12 +14,15 @@ namespace Diploma.DependencyResolver
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICurrentUserAware, CurrentUserAware>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmailSendingService, EmailSendingService>();
+            services.AddScoped<IPublicationService, PublicationService>();
+            
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPublicationRepository, PublicationRepository>();
+            services.AddScoped<IPublicationTypeRepository, PublicationTypeRepository>();
         }
     }
 }
