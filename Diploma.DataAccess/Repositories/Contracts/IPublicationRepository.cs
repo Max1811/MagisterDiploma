@@ -2,8 +2,7 @@
 
 namespace Diploma.DataAccess.Repositories.Contracts
 {
-    public interface IPublicationRepository: IGenericRepository<Publication>
+    public interface IPublicationRepository : IGenericRepository<Publication>
     {
-
     }
 }

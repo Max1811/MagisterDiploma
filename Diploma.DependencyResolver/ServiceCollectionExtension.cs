@@ -23,6 +23,9 @@ namespace Diploma.DependencyResolver
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPublicationRepository, PublicationRepository>();
             services.AddScoped<IPublicationTypeRepository, PublicationTypeRepository>();
+            services.AddScoped<IConferenceRepository, ConferenceRepository>();
+            services.AddScoped<IDigestRepository, DigestRepository>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
         }
     }
 }

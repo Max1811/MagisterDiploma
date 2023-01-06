@@ -2,8 +2,6 @@
 {
     public class PublicationDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int TypeId { get; set; }
@@ -16,8 +14,14 @@
 
         public string Organization { get; set; }
 
+        public string Category { get; set; }
+
+        public string Link { get; set; }
+
         public int? ConferenceId { get; set; }
 
         public int? DigestId { get; set; }
+
+        public int AuthorId { get; set; }
     }
 }

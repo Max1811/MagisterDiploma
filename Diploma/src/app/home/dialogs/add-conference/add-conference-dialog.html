@@ -1,0 +1,46 @@
+<h1 mat-dialog-title class="text-center">Додати Конференцію</h1>
+<form #myForm="ngForm" mat-dialog-content class="container">
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>Назва конференції</mat-label>
+            <input matInput [(ngModel)]="conferenceName" name="conferenceName" required>
+        </mat-form-field>
+    </div>
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field class="example-full-width">
+            <mat-label>Тип Конференції</mat-label>
+            <input type="text" required matInput [formControl]="conferenceTypeControl" [matAutocomplete]="auto" [(ngModel)]="conferenceType" name="conferenceType" (ngModelChange)="conferenceTypeChange($event)">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayConferenceType">
+              <mat-option *ngFor="let option of conferenceTypes" [value]="option">
+                {{option.type}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+    </div>
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>Місто Проведення</mat-label>
+            <input matInput required [(ngModel)]="conferenceCity" name="conferenceCity">
+            </mat-form-field>
+    </div>
+    <div class="mat-form-field-datepicket-wrapper form-group">
+        <mat-form-field>
+            <input matInput required [matDatepicker]="startTime" placeholder="Початок" [(ngModel)]="startDate" name="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startTime"></mat-datepicker-toggle>
+            <mat-datepicker #startTime></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="mat-form-field-datepicket-wrapper form-group">
+      <mat-form-field>
+          <input matInput required [matDatepicker]="endTime" placeholder="Кінець" [(ngModel)]="endDate" name="endDate">
+          <mat-datepicker-toggle matSuffix [for]="endTime"></mat-datepicker-toggle>
+          <mat-datepicker #endTime></mat-datepicker>
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mat-dialog-actions-wrapper">
+    <div class="mat-dialog-actions">
+        <button mat-raised-button (click)="onNoClick()">Назад</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [mat-dialog-close]="data.publicationType" [disabled]="isValid()">Додати</button>
+    </div>
+    </div>
+</form>

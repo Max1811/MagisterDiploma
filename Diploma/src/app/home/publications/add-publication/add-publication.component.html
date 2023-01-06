@@ -1,43 +1,102 @@
 <div class="add-publication-wrapper">
   <h2 class="add-publication-title">Додати Публікацію</h2>
-  <form [formGroup]="addPublication" (ngSubmit)="onSubmit()" class="add-publication-form">
+  <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="add-publication-form">
     <div class="form-group">
       <mat-form-field class="example-full-width">
         <mat-label>Назва Публікації</mat-label>
-        <input matInput placeholder="Назва...">
+        <input matInput placeholder="Назва..." [(ngModel)]="name" name="name" required>
       </mat-form-field>
     </div>
     <div class="form-group publication-type-wrapper">
       <mat-form-field class="example-full-width">
-        <mat-label>Тип Публікації</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" [ngModel]="publicationType" (ngModelChange)="publicationTypeChange($event)">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of publicationTypes" [value]="option">
-            {{option.type}}
+        <mat-label>Автор Публікації</mat-label>
+        <input type="text" matInput [formControl]="publicationAuthorControl" [matAutocomplete]="authorsAuto" [(ngModel)]="publicationAuthor" name="publicationAuthor" (ngModelChange)="publicationAuthorChange($event)" required>
+        <mat-autocomplete #authorsAuto="matAutocomplete" [displayWith]="displayPublicationAuthor">
+          <mat-option *ngFor="let option of authors" [value]="option">
+            {{option.lastName}} {{option.name[0]}}.{{option.patronymic[0]}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
       <p>або</p>
       <div class="add-publication-dialog-wrapper">
-        <button mat-raised-button color="basic" (click)="openDialog()">Створити</button>
+        <button mat-raised-button color="basic" (click)="openAddAuthorDialog()">Додати Автора Публікації</button>
+      </div>
+    </div>
+    <div>
+      <div class="form-group publication-type-wrapper">
+        <mat-form-field class="example-full-width">
+          <mat-label>Тип Публікації</mat-label>
+          <input type="text" required matInput [formControl]="publicationTypeControl" [matAutocomplete]="publicationAuto" [(ngModel)]="publicationType" name="pubicationType" (ngModelChange)="publicationTypeChange($event)">
+          <mat-autocomplete #publicationAuto="matAutocomplete" [displayWith]="displayPublicationType">
+            <mat-option *ngFor="let option of publicationTypes" [value]="option">
+              {{option.type}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <p>або</p>
+        <div class="add-publication-dialog-wrapper">
+          <button mat-raised-button color="basic" (click)="openDialog()">Додати Тип Публікації</button>
+        </div>
+      </div>
+      <div class="form-group publication-type-wrapper" *ngIf="isDisplayConferenceType">
+        <mat-form-field class="example-full-width">
+          <mat-label>Конференція</mat-label>
+          <input type="text" required matInput [formControl]="conferenceControl" [matAutocomplete]="conferenceAuto" [(ngModel)]="conference" name="conference" (ngModelChange)="conferenceChange($event)">
+          <mat-autocomplete #conferenceAuto="matAutocomplete" [displayWith]="displayConference">
+            <mat-option *ngFor="let option of conferences" [value]="option">
+              {{option.name}}, {{option.conferenceCity}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <p>або</p>
+        <div class="add-publication-dialog-wrapper">
+          <button mat-raised-button color="basic" (click)="openConferenceDialog()">Додати Конференцію</button>
+        </div>
+      </div>
+      <div class="form-group publication-type-wrapper" *ngIf="isDisplayDigest">
+        <mat-form-field class="example-full-width">
+          <mat-label>Збірник</mat-label>
+          <input type="text" required matInput [formControl]="digestControl" [matAutocomplete]="digestAuto" [(ngModel)]="digest" name="digest" (ngModelChange)="digestChange($event)">
+          <mat-autocomplete #digestAuto="matAutocomplete" [displayWith]="displayDigest">
+            <mat-option *ngFor="let option of digests" [value]="option">
+              {{option.name}}, {{option.type}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <p>або</p>
+        <div class="add-publication-dialog-wrapper">
+          <button mat-raised-button color="basic" (click)="openDigestDialog()">Додати Збірник</button>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <mat-form-field class="example-full-width">
         <mat-label>Видання</mat-label>
-        <input matInput placeholder="Видання...">
+        <input matInput placeholder="Видання..." [(ngModel)]="publishingHouse" name="publishingHouse" required>
       </mat-form-field>
     </div>
     <div class="form-group">
       <mat-form-field class="example-full-width">
         <mat-label>Місто Видання</mat-label>
-        <input matInput placeholder="Місто...">
+        <input matInput placeholder="Місто..." [(ngModel)]="publishingCity" name="publishingCity" required>
       </mat-form-field>
     </div>
     <div class="form-group">
       <mat-form-field class="example-full-width">
         <mat-label>Організація</mat-label>
-        <input matInput placeholder="Організація...">
+        <input matInput placeholder="Організація..." [(ngModel)]="organization" name="organization" required>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Категорія</mat-label>
+        <input matInput placeholder="Категорія..." [(ngModel)]="category" name="category" required>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Посилання</mat-label>
+        <input matInput placeholder="Посилання..." [(ngModel)]="link" name="link" required>
       </mat-form-field>
     </div>
     <div class="form-group">
@@ -45,16 +104,16 @@
       <div class="pages">
         <mat-form-field class="example-full-width">
           <mat-label>Від</mat-label>
-          <input matInput placeholder="ст.">
+          <input matInput placeholder="ст." [(ngModel)]="fromPage" name="fromPage" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>До</mat-label>
-          <input matInput placeholder="ст.">
+          <input matInput placeholder="ст." [(ngModel)]="toPage" name="toPage" required>
         </mat-form-field>
       </div>
     </div>
     <div class="form-group submit-button-wrapper">
-      <button mat-raised-button color="primary">Додати</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="isInvalid()">Додати</button>
     </div>
   </form>
 </div>

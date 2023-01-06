@@ -9,8 +9,9 @@ export interface DialogData {
   @Component({
     selector: 'add-publication-dialog',
     templateUrl: 'add-publication-type-dialog.html',
+    styleUrls: ['./../styles/styled-dialog.scss']
   })
-  export class AddPublicationDialog {
+  export class AddPublicationDialog implements OnInit {
     public publicationType: string;
 
     constructor(
@@ -19,11 +20,21 @@ export interface DialogData {
       private publicationService: PublicationService
     ) {}
   
+    ngOnInit(): void {
+      //this.dialogRef.updateSize('60%', '35%');
+    }
+
     onNoClick(): void {
       this.dialogRef.close();
     }
 
-    public async onAddPublicationTypeClick(): Promise<void> {
+    isValid(){
+      if(this.data.publicationType && this.data.publicationType != '')
+        return false;
+      return true;
+    }
+
+    public async onSubmit(): Promise<void> {
       await this.publicationService.addPublicationType(this.data.publicationType);
     }
   }

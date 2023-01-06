@@ -1,0 +1,31 @@
+.mat-form-field-wrapper{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.5rem;
+
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mat-dialog-actions-wrapper{
+    display: flex;
+    justify-content: right;
+}
+
+.mat-form-field-datepicket-wrapper {
+    display: block;
+}
+
+.container {
+    padding: 0 3rem 2rem 3rem;
+    margin: 0 auto;
+}
+
+::ng-deep .mat-dialog-container {
+    overflow-y: hidden !important;
+}

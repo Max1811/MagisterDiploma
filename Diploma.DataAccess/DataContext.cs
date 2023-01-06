@@ -28,7 +28,10 @@ namespace Diploma.DataAccess
         public DataContext() { }
 
         public DataContext(DbContextOptions options)
-            : base(options) { }
+            : base(options) 
+        {
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +44,10 @@ namespace Diploma.DataAccess
                 .ApplyConfiguration(new ConferenceTypeConfiguration())
                 .ApplyConfiguration(new DigestConfiguration())
                 .ApplyConfiguration(new PublicationAuthorConfiguration());
+
+            modelBuilder.Entity<PublicationType>().HasData(DatabaseInitializer.InitializePublicationTypes());
+            modelBuilder.Entity<AuthorType>().HasData(DatabaseInitializer.InitializeAuthorTypes());
+            modelBuilder.Entity<ConferenceType>().HasData(DatabaseInitializer.InitializeConferenceTypes());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

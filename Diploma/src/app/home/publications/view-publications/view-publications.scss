@@ -1,0 +1,15 @@
+@import "../../../../styles.scss";
+
+.container {
+
+    .title-container {
+
+        .search-title {
+            padding: 1.5rem 0;
+            margin: 0;
+            text-align: center;
+            font-weight: 700;
+            color: $orange;
+          }
+    }
+}

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title class="text-center">Додати Автора</h1>
+<form #myForm="ngForm" mat-dialog-content class="container">
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>Ім'я</mat-label>
+            <input matInput [(ngModel)]="name" name="name" required>
+        </mat-form-field>
+    </div>
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>Прізвище</mat-label>
+            <input matInput [(ngModel)]="lastName" name="lastName" required>
+        </mat-form-field>
+    </div>
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>По Батькові</mat-label>
+            <input matInput [(ngModel)]="patronymic" name="patronymic" required>
+        </mat-form-field>
+    </div>
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field class="example-full-width">
+            <mat-label>Тип Автору</mat-label>
+            <input type="text" required matInput [formControl]="authorTypeControl" [matAutocomplete]="auto" [(ngModel)]="authorType" name="authorType" (ngModelChange)="authorTypeChange($event)">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayAuthorType">
+              <mat-option *ngFor="let option of authorTypes" [value]="option">
+                {{option.type}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="mat-dialog-actions-wrapper">
+        <div class="mat-dialog-actions">
+            <button mat-raised-button (click)="onNoClick()">Назад</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()" [mat-dialog-close]="data.publicationType" [disabled]="isValid()">Додати</button>
+        </div>
+    </div>
+</form>

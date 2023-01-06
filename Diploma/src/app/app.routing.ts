@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { LoggedInGuard } from "./logged-in.guard";
 import { ChangePasswordComponent } from "./auth/create-new-password/change-password.component";
 import { AddPublicationComponent } from "./home/publications/add-publication/add-publication.component";
+import { ViewPublicationsComponent } from "./home/publications/view-publications/view-publications";
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: 'add-publication',
         component: AddPublicationComponent
+      },
+      {
+        path: 'view-publications',
+        component: ViewPublicationsComponent
       }
     ]
   },

@@ -79,6 +79,22 @@ namespace Diploma.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AuthorTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3157),
+                            Type = "Студент",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3156)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3162),
+                            Type = "Викладач",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3161)
+                        });
                 });
 
             modelBuilder.Entity("Diploma.DataAccess.Entities.Conference", b =>
@@ -140,6 +156,29 @@ namespace Diploma.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ConferenceTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3180),
+                            Type = "Всеукраїнська",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3178)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3184),
+                            Type = "Регіональна",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3183)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3187),
+                            Type = "Міжнародна",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3185)
+                        });
                 });
 
             modelBuilder.Entity("Diploma.DataAccess.Entities.Digest", b =>
@@ -177,14 +216,22 @@ namespace Diploma.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ConferenceId")
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ConferenceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DigestId")
+                    b.Property<int?>("DigestId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -259,6 +306,22 @@ namespace Diploma.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PublicationTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3130),
+                            Type = "Теза",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3101)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3136),
+                            Type = "Стаття",
+                            UpdatedDate = new DateTime(2023, 1, 6, 20, 18, 12, 541, DateTimeKind.Local).AddTicks(3135)
+                        });
                 });
 
             modelBuilder.Entity("Diploma.DataAccess.Entities.User", b =>
@@ -325,15 +388,11 @@ namespace Diploma.DataAccess.Migrations
                 {
                     b.HasOne("Diploma.DataAccess.Entities.Conference", "Conference")
                         .WithMany("Publications")
-                        .HasForeignKey("ConferenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConferenceId");
 
                     b.HasOne("Diploma.DataAccess.Entities.Digest", "Digest")
                         .WithMany("Publications")
-                        .HasForeignKey("DigestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DigestId");
 
                     b.HasOne("Diploma.DataAccess.Entities.PublicationType", "Type")
                         .WithMany("Publications")

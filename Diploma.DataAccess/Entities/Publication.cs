@@ -6,9 +6,9 @@
 
         public int TypeId { get; set; }
 
-        public int ConferenceId { get; set; }
+        public int? ConferenceId { get; set; }
 
-        public int DigestId { get; set; }
+        public int? DigestId { get; set; }
 
         public string PublishingCity { get; set; }
 
@@ -18,11 +18,15 @@
 
         public string Organization { get; set; }
 
+        public string Category { get; set; }
+        
+        public string Link { get; set; }
+
         public PublicationType Type { get; set; }
 
-        public Conference Conference { get; set; }
+        public Conference? Conference { get; set; }
 
-        public Digest Digest { get; set; }
+        public Digest? Digest { get; set; }
 
         public List<PublicationAuthor> PublicationAuthors { get; set; }
     }

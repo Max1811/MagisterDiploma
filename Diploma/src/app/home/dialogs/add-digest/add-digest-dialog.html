@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="text-center">Додати Збірник</h1>
+<form #myForm="ngForm" mat-dialog-content class="container">
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>Назва Збірника</mat-label>
+            <input matInput [(ngModel)]="name" name="name" required>
+        </mat-form-field>
+    </div>
+    <div class="mat-form-field-wrapper form-group">
+        <mat-form-field>
+            <mat-label>Тип Збірника</mat-label>
+            <input matInput [(ngModel)]="type" name="type" required>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="mat-dialog-actions-wrapper">
+        <div class="mat-dialog-actions">
+            <button mat-raised-button (click)="onNoClick()">Назад</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()" [mat-dialog-close]="data.publicationType" [disabled]="isValid()">Додати</button>
+        </div>
+    </div>
+</form>

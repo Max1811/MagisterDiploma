@@ -16,11 +16,13 @@ namespace Diploma.DataAccess.Entities.Configuration
 
             builder.HasOne(x => x.Conference)
                 .WithMany(x => x.Publications)
-                .HasForeignKey(x => x.ConferenceId);
+                .HasForeignKey(x => x.ConferenceId)
+                .IsRequired(false);
 
             builder.HasOne(x => x.Digest)
                 .WithMany(x => x.Publications)
-                .HasForeignKey(x => x.DigestId);
+                .HasForeignKey(x => x.DigestId)
+                .IsRequired(false);
         }
     }
 }

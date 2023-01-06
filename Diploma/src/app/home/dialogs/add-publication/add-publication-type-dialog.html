@@ -1,11 +1,15 @@
-<h1 mat-dialog-title>Додати Тип Публікації</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Назва публікації</mat-label>
-    <input matInput [(ngModel)]="data.publicationType">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Назад</button>
-  <button mat-button (click)="onAddPublicationTypeClick()" [mat-dialog-close]="data.publicationType" cdkFocusInitial>Додати</button>
-</div>
+<h1 mat-dialog-title class="text-center">Додати Тип Публікації</h1>
+<form #myForm="ngForm" mat-dialog-content class="container">
+  <div mat-dialog-content class="mat-form-field-wrapper">
+    <mat-form-field>
+      <mat-label>Назва публікації</mat-label>
+      <input matInput [(ngModel)]="data.publicationType" name="publicationType" required>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mat-dialog-actions-wrapper">
+    <div class="mat-dialog-actions">
+      <button mat-raised-button (click)="onNoClick()">Назад</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [mat-dialog-close]="data.publicationType" [disabled]="isValid()">Додати</button>
+    </div>
+  </div>
+</form>

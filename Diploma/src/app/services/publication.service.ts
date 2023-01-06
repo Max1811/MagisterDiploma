@@ -17,13 +17,138 @@ export class PublicationService {
     return this.api.get(url);
   }
 
+  public getConferenceTypes(filter: string): Promise<ConferenceType[] | null> {
+    var url = 'publication/conference-types';
+
+    if (filter && filter !== '')
+      url += `?filter=${filter}`;
+
+    return this.api.get(url);
+  }
+
   public addPublicationType(publicationType: string) {
     return this.api.post('publication/publication-type', { publicationType: publicationType });
   }
+
+  public addConference(name: string, conferenceTypeId: number, conferenceCity: string, startDate: string, endDate: string){
+    return this.api.post('publication/conference', 
+      { 
+        name: name, 
+        conferenceTypeId: conferenceTypeId ,
+        conferenceCity: conferenceCity,
+        startDate: startDate,
+        endDate: endDate
+      });
+  }
+
+  public getConferences(filter: string): Promise<Conference[] | null>{
+    var url = 'publication/conferences';
+
+    if(filter && filter !== '')
+      url += `?filter=${filter}`;
+
+    return this.api.get(url);
+  }
+
+  public getDigests(filter: string): Promise<Digest[] | null>{
+    var url = 'publication/digests';
+
+    if(filter && filter !== '')
+      url += `?filter=${filter}`;
+
+    return this.api.get(url);
+  }
+
+  public addDigest(name: string, type: string){
+    return this.api.post('publication/digest', 
+      { 
+        name: name, 
+        type: type
+      });
+  }
+
+  public getPublicationAuthors(filter: string): Promise<Author[] | null>{
+    var url = 'publication/authors';
+
+    if(filter && filter !== '')
+      url += `?filter=${filter}`;
+
+    return this.api.get(url);
+  }
+
+  public addPublicationAuthor(name: string, lastName: string, patronymic: string, authorTypeId: number){
+    return this.api.post('publication/author', 
+      { 
+        name: name, 
+        lastName: lastName,
+        patronymic: patronymic,
+        authorTypeId: authorTypeId
+      });
+  }
+
+  public getAuthorTypes(filter: string): Promise<AuthorType[] | null>{
+    var url = 'publication/author-types';
+
+    if(filter && filter !== '')
+      url += `?filter=${filter}`;
+
+    return this.api.get(url);
+  }
+
+  public addPublication(publication: PublicationRequest) {
+    return this.api.post('publication', publication);
+  }
+}
+
+export interface PublicationRequest {
+  name: string,
+  typeId: number,
+  publishingCity: string,
+  publishingHouse: string,
+  pages: string,
+  organization: string,
+  category: string,
+  link: string,
+  conferenceId: number | null,
+  digestId: number | null, 
+  authorId: number
 }
 
 export interface PublicationType {
   id: number;
   type: string;
+}
+
+export interface ConferenceType {
+  id: number;
+  type: string;
+}
+
+export interface Conference {
+  id: number;
+  name: string;
+  conferenceTypeId: number;
+  conferenceCity: string;
+  startDate: Date;
+  endDate: Date;
+}
+
+export interface Digest {
+  id: number,
+  name: string,
+  type: string
+}
+
+export interface Author {
+  id: number,
+  name: string,
+  lastName: string,
+  patronymic: string,
+  authorTypeId: number
+}
+
+export interface AuthorType {
+  id: number,
+  type: string
 }
 

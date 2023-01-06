@@ -5,15 +5,18 @@
 .add-publication-wrapper {
 
   .add-publication-title {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
+    margin: 0;
   }
 }
 .publication-type-wrapper {
   display: flex;
   
   p{
+    color: #999;
     align-self: flex-end;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+    margin: 0;
   }
 
   .add-publication-dialog-wrapper{
@@ -25,6 +28,10 @@
   }
 }
 
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.45em;
+}
+
 .form-group {
 
   .pages {
@@ -32,4 +39,9 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+.submit-button-wrapper {
+  margin: 0;
+  padding-top: 1rem;
 }

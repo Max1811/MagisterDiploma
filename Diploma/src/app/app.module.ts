@@ -28,6 +28,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRippleModule } from '@angular/material/core';
 import { AddPublicationDialog } from './home/dialogs/add-publication/add-publication-type-dialog';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { AddConferenceDialog } from './home/dialogs/add-conference/add-conference-dialog';
+import { MatDatepickerModule }from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AddDigestDialog } from './home/dialogs/add-digest/add-digest-dialog';
+import { AddAuthorDialog } from './home/dialogs/add-author/add-author-dialog';
+import { ViewPublicationsComponent } from './home/publications/view-publications/view-publications';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     SignUpComponent,
     ChangePasswordComponent,
     AddPublicationComponent,
-    AddPublicationDialog
+    AddPublicationDialog,
+    AddConferenceDialog,
+    AddDigestDialog,
+    AddAuthorDialog,
+    ViewPublicationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +67,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatDialogModule,
     MatRippleModule,
     ScrollingModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     //MaterialModule,
     
     RouterModule.forRoot(routes, { useHash: false }),
