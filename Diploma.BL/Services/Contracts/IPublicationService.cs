@@ -27,5 +27,7 @@ namespace Diploma.BL.Services.Contracts
         public Task<IEnumerable<AuthorModel>> GetPublicationAuthors(string? filter);
 
         public Task<IEnumerable<AuthorTypeModel>> GetAuthorTypes(string? filter);
+
+        public Task<IEnumerable<PublicationResponseModel>> GetPublications(string? filter);
     }
 }

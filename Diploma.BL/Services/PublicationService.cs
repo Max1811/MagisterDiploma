@@ -122,5 +122,12 @@ namespace Diploma.BL.Services
 
             return _mapper.Map<IEnumerable<AuthorTypeModel>>(entities);
         }
+
+        public async Task<IEnumerable<PublicationResponseModel>> GetPublications(string? filter)
+        {
+            var publications = await _publicationRepository.GetPublications(filter);
+
+            return _mapper.Map<IEnumerable<PublicationResponseModel>>(publications);
+        }
     }
 }

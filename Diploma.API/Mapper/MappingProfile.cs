@@ -19,6 +19,10 @@ namespace Diploma.API.Mapper
             CreateMap<PublicationDto, PublicationModel>();
             CreateMap<PublicationModel, Publication>();
 
+            CreateMap<PublicationResponseModel, PublicationResponseDto>();
+            CreateMap<Publication, PublicationResponseModel>()
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(p => p.PublicationAuthors.FirstOrDefault().Author));
+
             CreateMap<ConferenceDto, ConferenceModel>();
             CreateMap<ConferenceModel, Conference>();
 

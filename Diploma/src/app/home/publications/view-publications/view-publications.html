@@ -3,7 +3,10 @@
         <form>
             <h2 class="search-title">Search</h2>
             <div class="form-group">
-                
+                <mat-form-field>
+                    <mat-label>Пошук</mat-label>
+                    <input matInput name="search" [(ngModel)]="filter" (ngModelChange)="searchPublications($event)">
+                </mat-form-field>
             </div>
         </form>
     </div>

@@ -11,5 +11,7 @@ namespace Diploma.DataAccess.Repositories.Contracts
         public Task<IEnumerable<AuthorType>> GetAuthorTypes(string? filter);
 
         public Task AddPublicationAuthor(int id, int authorId);
+
+        public Task<PublicationAuthor?> GetPublicationAuthor(int publicationId);
     }
 }

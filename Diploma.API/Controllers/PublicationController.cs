@@ -4,6 +4,7 @@ using Diploma.API.Models.Request;
 using Diploma.API.Models.Response;
 using Diploma.BL.Models;
 using Diploma.BL.Services.Contracts;
+using Diploma.DataAccess.Repositories.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Diploma.API.Controllers
@@ -12,13 +13,16 @@ namespace Diploma.API.Controllers
     public class PublicationController : Controller
     {
         private readonly IPublicationService _publicationService;
+        private readonly IAuthorRepository _authorRepository;
         private readonly IMapper _mapper;
 
         public PublicationController(
             IPublicationService publicationService,
+            IAuthorRepository authorRepository,
             IMapper mapper)
         {
             _publicationService = publicationService;
+            _authorRepository = authorRepository;
             _mapper = mapper;
         }
 
@@ -28,6 +32,14 @@ namespace Diploma.API.Controllers
             var publicationModel = _mapper.Map<PublicationModel>(publication);
 
             await _publicationService.AddAsync(publicationModel);
+        }
+
+        [HttpGet("publications")]
+        public async Task<IEnumerable<PublicationResponseDto>> GetPublications([FromQuery] string? filter = null)
+        {
+            var publicationsModel = await _publicationService.GetPublications(filter);
+
+            return _mapper.Map<IEnumerable<PublicationResponseDto>>(publicationsModel);
         }
 
         [HttpGet("publication-types")]

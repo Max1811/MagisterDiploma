@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { ApiClient } from './api.client';
 
 @Injectable({
@@ -98,6 +98,15 @@ export class PublicationService {
   public addPublication(publication: PublicationRequest) {
     return this.api.post('publication', publication);
   }
+
+  public getPublications(filter: string): Promise<PublicationResponse[] | null>{
+    var url = 'publication/publications';
+
+    if(filter && filter !== '')
+      url += `?filter=${filter}`;
+
+    return this.api.get(url);
+  }
 }
 
 export interface PublicationRequest {
@@ -112,6 +121,21 @@ export interface PublicationRequest {
   conferenceId: number | null,
   digestId: number | null, 
   authorId: number
+}
+
+export interface PublicationResponse {
+  id: number,
+  name: string,
+  type: PublicationType,
+  publishingCity: string,
+  publishingHouse: string,
+  pages: string,
+  organization: string,
+  category: string,
+  link: string,
+  conference: Conference | null,
+  digest: Digest | null, 
+  Author: number | null
 }
 
 export interface PublicationType {

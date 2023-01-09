@@ -57,5 +57,10 @@ namespace Diploma.DataAccess.Repositories
 
             await _dataContext.SaveChangesAsync();
         }
+
+        public async Task<PublicationAuthor?> GetPublicationAuthor(int publicationId)
+        {
+            return await _dataContext.PublicationAuthors.FirstOrDefaultAsync(p => p.PublicationId == publicationId);
+        }
     }
 }
