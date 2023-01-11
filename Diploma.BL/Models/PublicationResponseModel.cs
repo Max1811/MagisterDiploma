@@ -25,5 +25,7 @@
         public DigestModel? Digest { get; set; }
 
         public AuthorModel? Author { get; set; }
+
+        public string AuthorId { get; set; }
     }
 }

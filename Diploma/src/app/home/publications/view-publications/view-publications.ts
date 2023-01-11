@@ -5,6 +5,7 @@ import { AccountService, ChangePasswordResponse } from 'src/app/services/account
 import { PublicationService } from 'src/app/services/publication.service';
 import { ThrottlingExecutor } from 'src/app/shared/throttler';
 import { PublicationResponse } from 'src/app/services/publication.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-view-publications',
@@ -17,22 +18,34 @@ export class ViewPublicationsComponent implements OnInit {
   public filter: string;
   public publications: PublicationResponse[] | null;
 
+  length: number | undefined;
+  pageSize = 8;
+  pageIndex = 0;
+  pageSizeOptions = [8, 24, 48];
+
   constructor(
-    private router: Router,
-    private publicationService: PublicationService,
-    private route: ActivatedRoute) { }
+    private publicationService: PublicationService) { }
 
   public async ngOnInit(): Promise<void> {
     this.publications = await this.publicationService.getPublications('');
+    this.length = this.publications?.length;
+    this.publications = await this.publicationService.getPublications('', 1, this.pageSize);
+  }
+
+  public async handlePageEvent(e: PageEvent) {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+
+    console.log(e);
+    this.publications = await this.publicationService.getPublications(this.filter, e.pageIndex + 1, e.pageSize);
   }
 
   public async searchPublications(filter: string) {
     this.throttler.schedule(async () => {
-      this.publications = await this.publicationService.getPublications(filter);
+      this.filter = filter;
+      this.publications = await this.publicationService.getPublications(filter, 1, this.pageSize);
+      this.length = this.publications?.length;
     });
-}
-
-  public async onSubmit(): Promise<void> {
-
   }
 }

@@ -12,6 +12,6 @@ namespace Diploma.DataAccess.Repositories.Contracts
 
         public Task AddPublicationAuthor(int id, int authorId);
 
-        public Task<PublicationAuthor?> GetPublicationAuthor(int publicationId);
+        public Task<Author?> GetPublicationAuthor(int publicationId);
     }
 }

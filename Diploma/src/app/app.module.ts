@@ -34,6 +34,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AddDigestDialog } from './home/dialogs/add-digest/add-digest-dialog';
 import { AddAuthorDialog } from './home/dialogs/add-author/add-author-dialog';
 import { ViewPublicationsComponent } from './home/publications/view-publications/view-publications';
+import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { ViewPublicationsComponent } from './home/publications/view-publications
     ScrollingModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatPaginatorModule,
     //MaterialModule,
     
     RouterModule.forRoot(routes, { useHash: false }),

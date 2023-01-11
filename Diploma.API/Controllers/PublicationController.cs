@@ -35,9 +35,9 @@ namespace Diploma.API.Controllers
         }
 
         [HttpGet("publications")]
-        public async Task<IEnumerable<PublicationResponseDto>> GetPublications([FromQuery] string? filter = null)
+        public async Task<IEnumerable<PublicationResponseDto>> GetPublicationsPaged([FromQuery] string? filter, [FromQuery] int? pageNumber = null, [FromQuery] int? pageSize = null)
         {
-            var publicationsModel = await _publicationService.GetPublications(filter);
+            var publicationsModel = await _publicationService.GetPublications(filter, pageNumber, pageSize);
 
             return _mapper.Map<IEnumerable<PublicationResponseDto>>(publicationsModel);
         }

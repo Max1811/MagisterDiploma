@@ -1,6 +1,8 @@
-﻿namespace Diploma.BL.Models
+﻿using Diploma.API.Models.Response;
+
+namespace Diploma.API.Models.Request
 {
-    public class AuthorModel
+    public class AuthorResponseDto
     {
         public int Id { get; set; }
 
@@ -10,8 +12,8 @@
 
         public string Patronymic { get; set; }
 
-        public AuthorTypeModel AuthorType { get; set; }
-
         public int AuthorTypeId { get; set; }
+
+        public AuthorTypeResponseDto AuthorType { get; set; }
     }
 }

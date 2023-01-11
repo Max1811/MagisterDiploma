@@ -99,11 +99,11 @@ export class PublicationService {
     return this.api.post('publication', publication);
   }
 
-  public getPublications(filter: string): Promise<PublicationResponse[] | null>{
-    var url = 'publication/publications';
+  public getPublications(filter: string, page: number | null = null, pageSize: number | null = null): Promise<PublicationResponse[] | null>{
+    var url = `publication/publications?filter=${filter}`;
 
-    if(filter && filter !== '')
-      url += `?filter=${filter}`;
+    if(page !== null && pageSize !== null)
+      url += `&pageNumber=${page}&pageSize=${pageSize}`
 
     return this.api.get(url);
   }
@@ -134,8 +134,9 @@ export interface PublicationResponse {
   category: string,
   link: string,
   conference: Conference | null,
-  digest: Digest | null, 
-  Author: number | null
+  digest: Digest | null,
+  authorId: number, 
+  author: AuthorResponse
 }
 
 export interface PublicationType {
@@ -169,6 +170,15 @@ export interface Author {
   lastName: string,
   patronymic: string,
   authorTypeId: number
+}
+
+export interface AuthorResponse {
+  id: number,
+  name: string,
+  lastName: string,
+  patronymic: string,
+  authorTypeId: number,
+  authorType: AuthorType
 }
 
 export interface AuthorType {

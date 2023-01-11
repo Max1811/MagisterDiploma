@@ -184,6 +184,7 @@ export class AddPublicationComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
+    console.log("we are here");
     await this.publicationService.addPublication({
       name: this.name,
       typeId: this.publicationType.id,

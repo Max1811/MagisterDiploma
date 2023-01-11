@@ -1,13 +1,55 @@
 <div class="container">
     <div class="title-container">
         <form>
-            <h2 class="search-title">Search</h2>
+            <h2 class="search-title">Пошук публікацій</h2>
             <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Пошук</mat-label>
+                <mat-form-field class="form-field">
+                    <mat-icon matPrefix>search</mat-icon>
                     <input matInput name="search" [(ngModel)]="filter" (ngModelChange)="searchPublications($event)">
                 </mat-form-field>
             </div>
         </form>
     </div>
+    <div class="cards-container">
+        <div class="cards-wrapper" *ngFor="let publication of publications">
+            <mat-card class="card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image">
+                    <img class="logo" src="../../../../assets/images/logo.png" />
+                  </div>
+                  <mat-card-title>{{publication.author.lastName}} {{publication.author.name}} {{publication.author.patronymic}}</mat-card-title>
+                  <mat-card-subtitle>{{publication.author.authorType.type}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>Назва публікації: {{publication.name}}</p>
+                  <p>
+                    Тип публікації: {{publication.type.type}}
+                  </p>
+                  <p>
+                    Категорія: {{publication.category}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="actions">
+                  <button mat-raised-button>Детальніше</button>
+                  <button mat-raised-button>Редагувати</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        
+    </div>
+    <div class="paginator-wrapper">
+        <mat-paginator #paginator
+        class="paginator"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex"
+        aria-label="Select page"
+        [showFirstLastButtons]="true"
+        [disabled]="false"
+        [hidePageSize]="false">
+        </mat-paginator>
+    </div>
+    
 </div>

@@ -51,13 +51,13 @@ export class LoginComponent implements OnInit {
       this.router.navigate(["/"]);
     }
     else if (result === LoginResponse.IncorrectPassword) {
-      this.errorMessage = "Incorrect Password";
+      this.errorMessage = "Невірний пароль";
     }
     else if (result === LoginResponse.IncorrectLogin) {
-      this.errorMessage = "Incorrect login";
+      this.errorMessage = "Неіснуючий логін";
     }
     else if (result === LoginResponse.EmptyData) {
-      this.errorMessage = "Fields Cannot Be Empty"
+      this.errorMessage = "Поля не можуть бути пустими"
     }
 
     this.submitted = true;

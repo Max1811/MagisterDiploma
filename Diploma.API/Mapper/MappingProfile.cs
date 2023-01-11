@@ -4,6 +4,7 @@ using Diploma.API.Models.Request;
 using Diploma.API.Models.Response;
 using Diploma.BL.Models;
 using Diploma.DataAccess.Entities;
+using Diploma.DataAccess.Repositories;
 
 namespace Diploma.API.Mapper
 {
@@ -48,9 +49,11 @@ namespace Diploma.API.Mapper
             CreateMap<Digest, DigestModel>();
 
             CreateMap<AuthorRequestDto, AuthorModel>();
+            CreateMap<AuthorResponseDto, AuthorModel>();
             CreateMap<AuthorModel, Author>();
 
             CreateMap<AuthorModel, AuthorRequestDto>();
+            CreateMap<AuthorModel, AuthorResponseDto>();
             CreateMap<Author, AuthorModel>();
 
             CreateMap<AuthorTypeModel, AuthorTypeResponseDto>();
@@ -58,6 +61,8 @@ namespace Diploma.API.Mapper
 
             CreateMap<AuthorTypeResponseDto, AuthorTypeModel>();
             CreateMap<AuthorTypeModel, Author>();
+
+            //CreateMap<PublicationAuthor>
         }
     }
 }

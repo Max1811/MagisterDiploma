@@ -35,7 +35,7 @@ export class PasswordRecoverComponent implements OnInit {
     const result = await this.accountService.recoverPassword(this.form.email.value);
 
     if (result === PasswordRecoverResponse.Success) {
-      this.successMessage = "Recovery email has been sent";
+      this.successMessage = "Електронний лист було успішно відправлено";
     }
     else if (result === PasswordRecoverResponse.UserNotExists) {
       this.errorMessage = "This user does not exist";

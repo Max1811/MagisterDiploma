@@ -26,6 +26,6 @@ namespace Diploma.API.Models.Response
 
         public DigestRequestDto? Digest { get; set; }
 
-        public AuthorRequestDto Author { get; set; }
+        public AuthorResponseDto Author { get; set; }
     }
 }
